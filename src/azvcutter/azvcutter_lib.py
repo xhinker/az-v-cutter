@@ -197,42 +197,6 @@ def extract_sub_video(
 
     print(f"Sub-video extracted and saved to: {output_path}")
 
-def concate_videos(
-    video_files
-    , output_file
-):
-    """
-    Merges multiple video files into one using FFmpeg with h264_nvenc encoder.
-
-    :param video_files: List of paths to input video files.
-    :param output_file: Path to the desired output MP4 file.
-    :param preset: Quality preset for h264_nvenc (default: "slow").
-    :param audio_codec: Audio codec for output (default: "aac").
-    """
-    if not video_files:
-        print("No video files provided.")
-        return
-
-    if not all(os.path.isfile(file) for file in video_files):
-        print("One or more input files do not exist.")
-        return
-
-    # Create a text file listing all input files for concat demuxer
-    list_file = 'video_list.txt'
-    with open(list_file, 'w') as f:
-        for file in video_files:
-            f.write(f"file '{file}'\n")
-
-    # FFmpeg command using concat demuxer and h264_nvenc encoder
-    # Note: Since we're using a list file, the input (-i) is the list file itself
-    ffmpeg_command = [
-        "ffmpeg"
-        , "-f", "concat"                # Input format for concat demuxer
-        , "-safe", "0"                  # Reduce security restrictions
-        , "-i", list_file               # Input is our list file
-        , output_file                   # Output file path
-    ]
-
 def merge_videos(
     video_files
     , output_file
