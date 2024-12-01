@@ -15,3 +15,17 @@ merge_videos(
     , output_file   = output_file
     , concate_only  = True
 )
+
+#%% cut video
+video_path = "/home/andrewzhu/storage_14t_5/record_videos/the_wild_robot.mp4"
+
+from azvcutter_lib import cut_video
+
+cutoff_ranges = [
+    ("00:01:50.00","00:02:05.00")
+]
+
+cut_video(
+    video_path=video_path
+    , cutoff_ranges=cutoff_ranges
+)
