@@ -127,7 +127,8 @@ def cut_video(video_path: str, cutoff_ranges: List[Tuple[str, str]]) -> None:
                 'ffmpeg', '-i', video_path,
                 '-ss', start, 
                 '-to', end if end != 'inf' else '',  # Omitting end for 'inf'
-                '-c:v', 'h264_nvenc',
+                "-c", "copy",
+                #'-c:v', 'h264_nvenc',
                 output_file
             ]
             if end == 'inf':  # Remove the option if end time is 'inf'
@@ -148,8 +149,12 @@ def cut_video(video_path: str, cutoff_ranges: List[Tuple[str, str]]) -> None:
         
         # Concatenate and write to final output
         concat_cmd = [
-            'ffmpeg', '-f', 'concat', '-safe', '0', '-i', concat_file,
-            '-c:v', 'h264_nvenc', '-c:a', 'copy',  # Assuming audio copy is fine; adjust if needed
+            'ffmpeg', 
+            '-f', 'concat', 
+            '-safe', '0', 
+            '-i', concat_file,
+            #'-c:v', 'h264_nvenc', 
+            '-c:a', 'copy',  # Assuming audio copy is fine; adjust if needed
             output_path
         ]
         subprocess.run(concat_cmd, check=True)

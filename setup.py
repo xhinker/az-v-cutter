@@ -2,7 +2,7 @@ from setuptools import setup,find_packages
 
 setup(
     name               = 'azvcutter'
-    , version          = '1.11302024.1'
+    , version          = '1.12012024.1'
     , license          = 'MIT'
     , author           = "Andrew Zhu"
     , author_email     = 'xhinker@hotmail.com'
